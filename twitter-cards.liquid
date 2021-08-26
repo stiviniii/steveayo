@@ -22,10 +22,14 @@ More information:
 
 {% elsif template contains 'collection' %}
 {% if collection.handle == "all" %}
-	<meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Browse All House Plans">
-    <meta name="twitter:description" content="Find architectural house plans and designs for residential living or commercial property for Africa and other parts of the world.">
-    <meta name="twitter:image" content="http:{{ collections['3-bedroom-house-plans'].image | img_url: '300x200', format:'pjpg'  }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:description" content="{{ page_description }}">
+    {% if collection.image %}
+        <meta name="twitter:image" content="http:{{ collection.image.src | img_url: '300x200', format:'pjpg' }}">
+    {% else %}
+        <meta name="twitter:image" content="http:{{ collection.products.first.featured_image | img_url: '300x200', format:'pjpg'  }}">
+    {% endif %}
 {% else %}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page_title }}">
